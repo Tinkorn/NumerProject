@@ -12,13 +12,13 @@ services:
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: 1234
-      MYSQL_DATABASE: test_db
+      MYSQL_DATABASE: tour_database
     ports:
       - "3306:3306"
     networks:
       - my-networks
   phpmyadmin:
-    image: phpmyadmin/phpmyadmin:latest
+    image: phpmyadmin:latest
     restart: always
     environment:
       PMA_HOST: db
