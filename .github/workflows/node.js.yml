@@ -34,4 +34,6 @@ jobs:
         cd Numerical-project
         npm test
     - name: test docker
-      run: docker-compose build
+      run: |
+        cd Express-API
+        docker-compose build
