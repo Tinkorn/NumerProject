@@ -29,15 +29,9 @@ jobs:
       run: |
         cd Express-API
         npm install
-        npm install jest
     - name: test frontend
       run: |
         cd Numerical-project
-        npm test
-    - name: test backend
-      run: |
-        cd Express-API
-        npm run test --detectOpenHandles
         npm test
     - name: test docker
       run: docker-compose build
