@@ -33,6 +33,11 @@ jobs:
       run: |
         cd Numerical-project
         npm test
+    - name: test backend
+      run: |
+        cd Express-API
+        npm install
+        npm test 
     - name: test docker
       run: |
         cd Express-API
