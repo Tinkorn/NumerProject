@@ -11,11 +11,10 @@ const swaggerDocument = require('./swagger_output.json');
 const TOKEN_KEY="shffhsjfkh"
 
 // create the connection to database
-const connection = mysql.createConnection({
-  host: 'mysql',
+const connection = mysql.createPool({
+  host: 'localhost'||'mysql',
   user: 'root',
-  database: 'tour_database',
-  password:'1234'
+  database: 'tour_database'
 });
 
 function verify (req,res,next){
