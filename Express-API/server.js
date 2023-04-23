@@ -1,15 +1,16 @@
 var express = require('express')
 var cors = require('cors')
 var app = express()
+const bodyParser = require('body-parser');
 const mysql = require('mysql2');
 const jwt = require('jsonwebtoken')
-const bodyParser = require('body-parser')
 app.use(cors())
 app.use(bodyParser.json())
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger_output.json');
+const { use } = require('chai');
 const TOKEN_KEY="shffhsjfkh"
-
+var urlencodedParser = bodyParser.urlencoded({ extended: true })
 // create the connection to database
 const connection = mysql.createPool({
   host: 'localhost'||'mysql',
@@ -85,6 +86,25 @@ app.post('/register', function (req, res, next) {
         }
       );
 })
+
+app.post('/login',urlencodedParser,function(req,res,next) {
+  let user = req.body.username
+  let password = req.body.password
+  let token = jwt.sign({user, password}, TOKEN_KEY)
+  res.send(token)
+})
+
+app.get('/test',function(req,res,next) {
+  res.send('hello')
+})
+
+app.post("/Token",urlencodedParser,(req, res) => {
+  let user = req.body.admin
+  let password = req.body.password
+  let token = jwt.sign({user, password}, SECRET_KEY)
+  res.send(token)
+  })
+
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.listen(5000)
